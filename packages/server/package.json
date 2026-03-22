@@ -1,0 +1,22 @@
+{
+  "name": "@context-anchor/server",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@context-anchor/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.10.1",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "typescript": "^5.4.0"
+  }
+}
