@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "type": "module",
   "bin": {
-    "context-anchor": "./dist/index.js"
+    "context-anchor": "./dist/index.js",
+    "ctx": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
