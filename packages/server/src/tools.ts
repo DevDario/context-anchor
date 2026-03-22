@@ -28,3 +28,13 @@ export const UpdateFeatureInput = z.object({
 })
 
 export type UpdateFeatureInput = z.infer<typeof UpdateFeatureInput>
+
+export const ExportContextInput = z.object({
+  target: z
+   .enum(["claude", "openai", "gemini", "cursor"])
+    .describe("Target LLM or tool to format text for."),
+  feature: z.string().optional().describe("Feature name to include."),
+  cwd: z.string().optional(),
+})
+
+export type ExportContextInput = z.infer<typeof ExportContextInput>

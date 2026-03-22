@@ -7,6 +7,8 @@ import { statusCommand } from "./commands/status.js"
 import { newFeatureCommand } from "./commands/new-feature.js"
 import { snapshotCommand } from "./commands/snapshot.js"
 import { installHookCommand } from "./commands/install-hook.js"
+import { exportCommand } from "./commands/export.js"
+import type { LLMTarget } from "@context-anchor/core"
 
 const program = new Command()
 
@@ -45,5 +47,13 @@ program
   .command("install-hook")
   .description("Install git pre-commit hook for automatic snapshots")
   .action(() => installHookCommand())
+
+program
+ .command("export <target>")
+ .description("Export content formatted for a target LLM (claude | openai | gemini | cursor)")
+  .option("-f, --feature <name>", "Include a specific feature context")
+  .option("-c, --copy", "Copy output to Clipboard",false)
+  .action((target,options) => exportCommand(target as LLMTarget, options))
+ 
 
 program.parse()
