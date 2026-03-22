@@ -5,6 +5,8 @@ import { initCommand } from "./commands/init.js"
 import { serveCommand } from "./commands/serve.js"
 import { statusCommand } from "./commands/status.js"
 import { newFeatureCommand } from "./commands/new-feature.js"
+import { snapshotCommand } from "./commands/snapshot.js"
+import { installHookCommand } from "./commands/install-hook.js"
 
 const program = new Command()
 
@@ -30,8 +32,18 @@ program
   .action(() => statusCommand())
 
 program
-  .command("new-feature <name>")
+  .command("new-feature <n>")
   .description("Create a new feature context document")
   .action((name) => newFeatureCommand(name))
+
+program
+  .command("snapshot")
+  .description("Save a snapshot of the current .context/ state")
+  .action(() => snapshotCommand())
+
+program
+  .command("install-hook")
+  .description("Install git pre-commit hook for automatic snapshots")
+  .action(() => installHookCommand())
 
 program.parse()

@@ -3,6 +3,7 @@ import { join } from "path"
 import { input } from "@inquirer/prompts"
 import chalk from "chalk"
 import { projectTemplate } from "../templates.js"
+import { installGitHook } from "../git-hook.js"
 
 interface InitOptions {
   interactive: boolean
@@ -61,10 +62,21 @@ export async function initCommand(options: InitOptions): Promise<void> {
 
   writeFileSync(projectDoc, projectTemplate(templateData), "utf-8")
 
+  const hookResult = installGitHook(cwd)
+
   console.log(chalk.green("\n  ✓ Context Anchor initialized\n"))
   console.log(`  ${chalk.dim("created")}  .context/project.md`)
   console.log(`  ${chalk.dim("created")}  .context/features/`)
   console.log(`  ${chalk.dim("created")}  .context/history/\n`)
+
+  const hookMessages = {
+    installed: chalk.dim("  hook     pre-commit → context-anchor snapshot"),
+    appended:  chalk.dim("  hook     pre-commit → appended context-anchor snapshot"),
+    skipped:   chalk.dim("  hook     pre-commit → already installed, skipped"),
+    "no-git":  chalk.yellow("  ⚠ no .git found — snapshot on commit unavailable"),
+  }
+  console.log(hookMessages[hookResult])
+  console.log()
 
   if (!options.interactive) {
     console.log(chalk.dim(`  Edit ${chalk.white(".context/project.md")} to add your project context.`))
