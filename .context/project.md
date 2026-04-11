@@ -1,11 +1,10 @@
-# context-anchor
+# My Project
 
 ## Stack
-- TypeScript
-- NodeJS
+- <!-- e.g. Next.js, Node.js, PostgreSQL -->
 
 ## Principles
-- CLI
+- <!-- e.g. mobile-first, offline-capable -->
 
 ## Conventions
-- clean code
+- <!-- e.g. functional services, no classes -->
